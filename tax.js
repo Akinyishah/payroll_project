@@ -90,22 +90,29 @@ function calc_nhdf(gross, nhdf_rate = 0.015) {
 
 //Taxable Income
 function calc_taxable_income(gross,nssf,nhdf,nhif){
-    return gross-(nssf + ndfh + nhif)
+    return gross-(nssf + nhdf + nhif)
 }
 
 //PAYE
-function calc_payee(income){
-    let payee=0;
+function calc_paye(income){
+    let paye=0;
     if (income <=24000){
-        payee=0;
+        paye=0;
     } else if(income<=32333){
-        payee=(24000 * 0.1) + ((income-24000) * 0.25) -2400;
+        paye=(24000 * 0.1) + ((income-24000) * 0.25) -2400;
     } else if(income<=50000){
-        payee(24000 * 0.1) + (8333 *0.25) + ((income-32333) *0.3)-2400;
+        paye=(24000 * 0.1) + (8333 *0.25) + ((income-32333) *0.3)-2400;
     } else if (income<=80000){
-        payee=(24000 * 0.1) + (8333 * 0.25) +((467667*0.3)) + ((income-50000)*0.325)-2400;
+        paye=(24000 * 0.1) + (8333 * 0.25) +((467667*0.3)) + ((income-50000)*0.325)-2400;
     } else{
-        payee=(24000 * 0.1) +(8333*0.25) +(467667 * 0.3) +(300000*0.325) +((income-800000)*0.35)-2400
+        paye=(24000 * 0.1) +(8333*0.25) +(467667 * 0.3) +(300000*0.325) +((income-800000)*0.35)-2400
     }
-    return payee;
+    return paye;
 }
+//Calculations
+let gross_salary=gross_salary(basic_salary,benefits);
+let nhif =calc_nhif(gross_salary);
+let nssf=calc_nssf(gross_salary);
+let ndhf=calc_nhdf(gross_salary);
+let taxable_income=taxable_income(gross_salary,nssf,nhif,ndhf)
+let payee=calc_paye(taxable_income)
