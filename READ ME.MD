@@ -21,8 +21,12 @@ FORM INPUTS
   2.JS reads input values
   3.JS processes the data (calculations,modifications)
 
-document.getElementById()-method used to select and access a single HTML element by its unique ID attribute      
+document.getElementById()-method used to select and access a single HTML element by its unique ID attribute    
 
+.addEventListener() -function that listens for specific events.
+Events-What a user cab do when using an application e.g clicks, scrolling, submissions. key presses and mouse movements.
+
+even.prevent Default() e.preventDefault()-it prevents the default behavious of the browser when an event (FORM SUBMISSION ) occurs
 
 
 

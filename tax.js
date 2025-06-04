@@ -15,27 +15,27 @@ document.getElementById("form").addEventListener('submit', function (event) {
     let benefits = Number(document.getElementById("benefits").value)
 
     let gross = calculate_gross(basic, benefits)
-    document.getElementById("gross").innerHTML = gross.toFixed(2);
+    document.getElementById("gross").innerHTML = gross;
 
     //NHIF
-    const nhif = calc_nhif(gross);
-    document.getElementById("nhif").innerHTML = nhif.toFixed(2);
+    let nhif = calc_nhif(gross);
+    document.getElementById("nhif").innerHTML = nhif;
 
     //NSSF
-    const nssf = calc_nssf(gross);
-    document.getElementById("nssf").innerHTML = nssf.toFixed(2);
+    let nssf = calc_nssf(gross);
+    document.getElementById("nssf").innerHTML = nssf;
 
     //NHDF
-    const nhdf = calc_nhdf(gross);
-    document.getElementById("nhdf").innerHTML = nhdf.toFixed(2);
+    let nhdf = calc_nhdf(gross);
+    document.getElementById("nhdf").innerHTML = nhdf;
 
     //Taxable income
-    const taxable = calc_taxable_income(gross, nhif, nssf, ndhf);
-    document.getElementById("income").innerHTML = taxable.toFixed(2);
+    let taxable = calc_taxable_income(gross, nhif, nssf, ndhf);
+    document.getElementById("income").innerHTML = taxable;
 
     //Payee
-    const payee = calc_payee(taxable);
-    document.getElementById("payee").innerHTML = payee.toFixed(2)
+    let payee = calc_payee(taxable);
+    document.getElementById("payee").innerHTML = payee
 })
 //NHIF
 function calc_nhif(gross) {
@@ -85,7 +85,7 @@ function calc_nssf(gross, nssf_rate = 0.06) {
 
 //NHDF
 function calc_nhdf(gross, nhdf_rate = 0.015) {
-    return gross * nhdf_rate
+    return gross * nhdf_rate;
 }
 
 //Taxable Income
@@ -109,26 +109,3 @@ function calc_payee(income){
     }
     return payee;
 }
-
-//inputs
-//const basic_salary=ParseFloat(Prompt("Enter basic Salary: "))
-//const benefits=ParseFloat(Prompt("Enter benefits.allowances: "))
-
-//Calculations
-const gross_salary=gross_salary(basic_salary,benefits);
-const nhif =calc_nhif(gross_salary);
-const nssf=calc_nssf(gross_salary);
-const ndhf=calc_nhdf(gross_salary);
-const taxable_icome=taxable_income(gross_salary,nssf,nhif,ndhf)
-const payee=calc_payee(taxable_income)
-
-
-
-//Display
-alert(`Gross Salary:${gross_salary.toFixed(2)}
-NHIF:${nhif.toFixed(2)}
-NSSF:${nssf.toFixed(2)}
-NHDF:${nhdf.toFixed(2)}
-Taxable Income: ${taxable_income.toFixed(2)}
-PAYE: ${payee.toFixed(2)}`);
-    
