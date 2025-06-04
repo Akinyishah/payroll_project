@@ -26,11 +26,23 @@ document.getElementById()-method used to select and access a single HTML element
 .addEventListener() -function that listens for specific events.
 Events-What a user cab do when using an application e.g clicks, scrolling, submissions. key presses and mouse movements.
 
-even.prevent Default() e.preventDefault()-it prevents the default behavious of the browser when an event (FORM SUBMISSION ) occurs
+even.prevent Default()-it prevents the default behaviour of the browser when an event (FORM SUBMISSION ) occurs
+
+
+NETFLIFY-pass- paltform as a service-provides a platform for devs to build, deploy and manage applicationwithout worrying about infrastructure.
+POINT of ENTRY should be index.html
+
+HTML BINDING WITH JAVA SCRIPT
+  -Updating HTML content using java script
+  -JS idenfities elements using ID attributes.
+  -ID attributes uniquely identifies elements for a script.
+
+HOW TO ACCESS .PASS VALUES TO OR FROM HTML USING JAVA SCRIPT.
+USE document.getelementbyID()takes 1 argument-- argument is the ID of the element.-used to access elements by their unique defined attribute/gets the first instance. 
+document.getelementbyid("id").value-used with form elements only.
+document.getelementbyid("id").innerHTML-used with any element
+document.getelementbyid("id").innerText-used with any element
 
 
 
 
-
-
-CREATE A PROJECT WHERE WE WILL BE TAKING USER INPUT 

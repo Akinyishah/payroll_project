@@ -3,39 +3,43 @@
 // document.getElementById("result").innerText = num1 + num2
 
 
-document.getElementById("form").addEventListener('submit', function (event) {
+document.getElementById("taxform").addEventListener('submit', function (event) {
     event.preventDefault()
+
+    let basic = Number(document.getElementById("basic_salary").value)
+    let benefits = Number(document.getElementById("benefits").value)
 
     //Gross Salary
     function calculate_gross(basic, benefits) {
         return basic + benefits
-
     }
-    let basic = Number(document.getElementById("basic_salary").value)
-    let benefits = Number(document.getElementById("benefits").value)
 
     let gross = calculate_gross(basic, benefits)
     document.getElementById("gross").innerHTML = gross;
 
     //NHIF
     let nhif = calc_nhif(gross);
-    document.getElementById("nhif").innerHTML = nhif;
+    document.getElementById("nhif").innerHTML = nhif.toFixed(2);
 
     //NSSF
     let nssf = calc_nssf(gross);
-    document.getElementById("nssf").innerHTML = nssf;
+    document.getElementById("nssf").innerHTML = nssf.toFixed(2);
 
     //NHDF
-    let nhdf = calc_nhdf(gross);
-    document.getElementById("nhdf").innerHTML = nhdf;
+    let ndhf = calc_ndhf(gross);
+    document.getElementById("ndhf").innerHTML = ndhf.toFixed(2);
 
     //Taxable income
     let taxable = calc_taxable_income(gross, nhif, nssf, ndhf);
-    document.getElementById("income").innerHTML = taxable;
+    document.getElementById("taxable").innerHTML = taxable.toFixed(2);
 
-    //Payee
-    let payee = calc_payee(taxable);
-    document.getElementById("payee").innerHTML = payee
+    //Paye
+    let paye = calc_paye(taxable);
+    document.getElementById("paye").innerHTML = paye.toFixed(2)
+
+    // Net Slary
+    let net = calc_netsalary(gross,nhif, nssf, ndhf, paye)
+    document.getElementById("net").innerHTML = net.toFixed(2)
 })
 //NHIF
 function calc_nhif(gross) {
@@ -80,18 +84,27 @@ function calc_nhif(gross) {
 
 // NSSF
 function calc_nssf(gross, nssf_rate = 0.06) {
-    return gross * nssf_rate;
+    let nssf=gross*nssf_rate
+    if (gross<=18000){
+        gross*nssf_rate
+    } else {
+        nssf=18000*nssf_rate
+    }
+    return nssf
 }
 
 //NHDF
-function calc_nhdf(gross, nhdf_rate = 0.015) {
-    return gross * nhdf_rate;
+function calc_ndhf(gross, ndhf_rate = 0.015) {
+    let ndhf = gross * ndhf_rate;
+    return ndhf;
 }
 
 //Taxable Income
-function calc_taxable_income(gross,nssf,nhdf,nhif){
-    return gross-(nssf + nhdf + nhif)
+function calc_taxable_income(gross,nhif,nssf,ndhf){
+    let income = gross - (nhif + nssf + ndhf)
+    return income;
 }
+
 
 //PAYE
 function calc_paye(income){
@@ -109,10 +122,10 @@ function calc_paye(income){
     }
     return paye;
 }
-//Calculations
-let gross_salary=gross_salary(basic_salary,benefits);
-let nhif =calc_nhif(gross_salary);
-let nssf=calc_nssf(gross_salary);
-let ndhf=calc_nhdf(gross_salary);
-let taxable_income=taxable_income(gross_salary,nssf,nhif,ndhf)
-let payee=calc_paye(taxable_income)
+
+//NET SALARY
+function calc_netsalary(gross,nhif, nssf, ndhf, paye){
+    let net_salary = gross -(nhif + nssf + ndhf + paye)
+    return net_salary;
+}
+ 
